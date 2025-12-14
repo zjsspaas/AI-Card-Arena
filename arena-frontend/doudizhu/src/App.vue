@@ -41,6 +41,9 @@
           >
             回放
           </router-link>
+           <router-link to="/agentcf" class="nav-item" :class="{ active: $route.path === '/agentcf' }">
+            智能体存放
+          </router-link>
         </nav>
 
         <!-- 登录 / 注册 -->
@@ -99,6 +102,8 @@ const pageClass = computed(() => {
       return 'page-replay'
     case '/paihang':
       return 'page-ranking'
+    case '/agentcf':
+      return 'page-agentcf'
     default:
       return 'page-default'
   }
