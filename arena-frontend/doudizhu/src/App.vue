@@ -12,9 +12,13 @@
           <router-link to="/" class="nav-item" :class="{ active: $route.path === '/' }">
             首页
           </router-link>
-          <router-link to="/traintrack_t" class="nav-item" :class="{ active: $route.path === '/traintrack_t' }">
+          <router-link
+            to="/traintrack_t"
+            class="nav-item"
+            :class="{ active: $route.path === '/traintrack_t' }"
+          >
             训练场
-            </router-link>
+          </router-link>
           <router-link to="/game" class="nav-item" :class="{ active: $route.path === '/game' }">
             赛道
           </router-link>
@@ -41,7 +45,11 @@
           >
             回放
           </router-link>
-           <router-link to="/agentcf" class="nav-item" :class="{ active: $route.path === '/agentcf' }">
+          <router-link
+            to="/agentcf"
+            class="nav-item"
+            :class="{ active: $route.path === '/agentcf' }"
+          >
             智能体存放
           </router-link>
         </nav>
@@ -207,7 +215,6 @@ body {
   color: #fff;
 }
 
-/*  页面背景层（关键） */
 .page-wrapper {
   width: 100%;
   min-height: calc(100vh - 140px);
@@ -243,12 +250,12 @@ body {
 .main-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
 }
 
 .main-footer {
   background: #fff;
   border-top: 1px solid var(--border-color);
+  margin-top: 5px;
 }
 
 .footer-container {
@@ -259,7 +266,7 @@ body {
 }
 
 .footer-link {
-  margin: 0 10px;
+  margin: 10px 15px;
   font-size: 14px;
   color: var(--text-secondary);
   text-decoration: none;
