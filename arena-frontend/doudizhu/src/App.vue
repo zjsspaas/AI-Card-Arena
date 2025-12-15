@@ -12,9 +12,9 @@
           <router-link to="/" class="nav-item" :class="{ active: $route.path === '/' }">
             首页
           </router-link>
-          <router-link to="/train" class="nav-item" :class="{ active: $route.path === '/train' }">
+          <router-link to="/traintrack_t" class="nav-item" :class="{ active: $route.path === '/traintrack_t' }">
             训练场
-          </router-link>
+            </router-link>
           <router-link to="/game" class="nav-item" :class="{ active: $route.path === '/game' }">
             赛道
           </router-link>
@@ -230,6 +230,9 @@ body {
 }
 
 .page-wrapper.page-replay {
+  background-color: #f0f8ff;
+}
+.page-wrapper.page-agentcf {
   background-color: #f0f8ff;
 }
 

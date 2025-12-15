@@ -1,3 +1,3 @@
 <template>
-  <div>登录</div>
+  <div>训练场</div>
 </template>

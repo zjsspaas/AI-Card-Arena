@@ -1,16 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-// 导入所有页面组件
+import Agentcf from '@/views/agentcf/index.vue'
 import Home from '@/views/home/index.vue'
-import Game from '@/views/game/index.vue'
 import Login from '@/views/login/index.vue'
+import Rankinglist from '@/views/rankinglist/index.vue'
+import Racingtrack from '@/views/racingtrack/index.vue'
 import Register from '@/views/register/index.vue'
-import Match from '@/views/match/index.vue'
-import Matching from '@/views/matching/index.vue'
 import ReplayList from '@/views/replay/list.vue'
 import ReplayDetail from '@/views/replay/detail.vue'
-import Paihang from '@/views/paihang/index.vue'
-import Agentcf from '@/views/agentcf/index.vue'
+import Traintrack_t from '@/views/traintrack_t/index.vue'
+
+import TraintrackIndex from '@/views/traintrack/index.vue' // 训练场/赛道选择页
+import Training from '@/views/traintrack/training/index.vue' // 训练场页
+import Track from '@/views/traintrack/track/index.vue' // 赛道页
+import Battle from '@/views/traintrack/track/battle.vue' // 对抗页
+import Commentary from '@/views/traintrack/track/commentary.vue' // 解说页
 
 const routes = [
   {
@@ -24,9 +28,14 @@ const routes = [
     component: Home,
   },
   {
-    path: '/game',
-    name: 'Game',
-    component: Game,
+    path: '/traintrack_t',
+    name: 'Traintrack_t',
+    component: Traintrack_t,
+  },
+  {
+    path: '/racingtrack',
+    name: 'Racingtrack',
+    component: Racingtrack,
   },
   {
     path: '/login',
@@ -39,16 +48,6 @@ const routes = [
     component: Register,
   },
   {
-    path: '/match',
-    name: 'Match',
-    component: Match,
-  },
-  {
-    path: '/matching',
-    name: 'Matching',
-    component: Matching,
-  },
-  {
     path: '/replay/list',
     name: 'ReplayList',
     component: ReplayList,
@@ -59,14 +58,40 @@ const routes = [
     component: ReplayDetail,
   },
   {
-    path: '/paihang',
-    name: 'Paihang',
-    component: Paihang,
+    path: '/rankinglist',
+    name: 'Rankinglist',
+    component: Rankinglist,
   },
   {
     path: '/agentcf',
     name: 'Agentcf',
     component: Agentcf,
+  },
+  // 斗地主训练赛道模块
+  {
+    path: '/traintrack',
+    name: 'TraintrackIndex',
+    component: TraintrackIndex, // 训练场/赛道选择页
+  },
+  {
+    path: '/traintrack/training',
+    name: 'Training',
+    component: Training, // 训练场页
+  },
+  {
+    path: '/traintrack/track',
+    name: 'Track',
+    component: Track, // 赛道页
+  },
+  {
+    path: '/traintrack/track/battle',
+    name: 'Battle',
+    component: Battle, // 对抗页
+  },
+  {
+    path: '/traintrack/track/commentary',
+    name: 'Commentary',
+    component: Commentary, // 解说页
   },
 ]
 
