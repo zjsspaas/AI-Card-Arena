@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # doudizhu
 
 This template should help get you started developing with Vue 3 in Vite.
@@ -43,6 +42,3 @@ npm run build
 ```sh
 npm run lint
 ```
-=======
-# AI-Card-Arena Project
->>>>>>> 2d89134e61ce4c59aea5e36e06ecd6cf7330a8fd
