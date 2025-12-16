@@ -1,4 +1,4 @@
 <template>
-  <div class="game-page">
+  <div class="battle-track">
   </div>
 </template>
