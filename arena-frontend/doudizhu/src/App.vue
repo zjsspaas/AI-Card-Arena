@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- 导航栏 -->
-    <header class="main-header">
+    <header  v-if="!isAuthPage" class="main-header">
       <div class="header-container">
         <div class="logo-section">
           <div class="logo-icon">⚡</div>
@@ -71,7 +71,7 @@
     </main>
 
     <!-- 页脚 -->
-    <footer class="main-footer">
+    <footer v-if="!isAuthPage" class="main-footer">
       <div class="footer-container">
         <div class="footer-info">
           <p>© 2025 智算博弈场 · AI-CARD-ARENA</p>
@@ -94,6 +94,11 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
+/* 核心：按组件路径判断 */
+const isAuthPage = computed(() => {
+  const path = route.matched[0]?.components?.default.__file ?? ''
+  return path.includes('views/login') || path.includes('views/register')
+})
 
 // 根据路由切换背景
 const pageClass = computed(() => {
