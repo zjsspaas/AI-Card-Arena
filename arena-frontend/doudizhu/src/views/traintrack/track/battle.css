@@ -1,0 +1,228 @@
+.battle-container {
+  width: auto;
+  height: calc(100vh - 80px);
+  /* border: 1px solid rgb(255, 56, 56); */
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+  padding-top: 20px;
+}
+.up {
+  /* border: 1px solid rgb(59, 82, 255); */
+  flex: 8;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* 相对于.battle-container的100% */
+  min-height: 0; /* 解决flex容器问题 */
+}
+
+.left-constainer {
+  height: 95%;
+  flex: 9;
+  /* border: 1px solid rgb(58, 43, 222); */
+  border-radius: 10px;
+  background-image: url('/images/bg.png');
+  background-position: center center; /* 水平和垂直都居中 */
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* background-size: 300px 200px; 具体宽高 */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 0;
+}
+
+.up-down-player {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  min-height: 0;
+}
+.up-players {
+  flex: 1;
+  width: 95%;
+  border: 1px solid rgb(16, 19, 154);
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding-top: 10px;
+}
+.left-player-main {
+  width: 100%;
+  height: 90%;
+  flex: 1;
+  border: 1px solid rgb(169, 142, 74);
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.left-player-time {
+  position: absolute;
+  font-size: 30px;
+  color: rgb(229, 90, 90);
+  top: 300px;
+  left: 280px;
+}
+.right-player-time {
+  position: absolute;
+  font-size: 30px;
+  color: rgb(229, 90, 90);
+  /* margin-top: 200px; */
+  right: 120px;
+  top: 180px;
+}
+.bottom-timer-player {
+  color: red;
+  font-size: 30px;
+  left: 150px;
+  top: 40px;
+  position: absolute;
+}
+.right-player-main {
+  width: 100%;
+  height: 90%;
+  flex: 1;
+  gap: 10px;
+  border: 1px solid rgb(169, 142, 74);
+  display: flex;
+  flex-direction: row-reverse;
+  position: relative;
+}
+.user-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: rgb(135, 135, 234);
+}
+.user-info {
+  width: 100px;
+  height: 20px;
+  text-align: center;
+  /* background-color: rgb(168, 203, 234); */
+  display: flex;
+  flex-direction: column;
+}
+.icon-person {
+  font-size: 18px;
+}
+.user-score {
+  font-size: 16px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 3px;
+  border: 1px solid rgb(255, 255, 255);
+}
+.hand-card {
+  border: 1px solid rgb(255, 61, 61);
+  height: 160px;
+  flex: 1;
+  /* width: 0px; */
+}
+.down-player-main {
+  width: 90%;
+  flex: 1;
+  border: 1px solid rgb(156, 21, 21);
+  display: flex;
+  flex-direction: column;
+  min-height: 0px;
+  gap: 10px;
+  position: relative;
+}
+.button-select {
+  border: 1px solid rgb(255, 255, 255);
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  min-height: 0px;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+.button-select button {
+  width: 100px;
+  height: 30px;
+}
+/* 按钮颜色 */
+.btn-hint {
+  background-color: aliceblue;
+}
+.btn-pass {
+  background-color: rgb(151, 71, 71);
+}
+.btn-play {
+  background-color: rgb(39, 132, 39);
+}
+.show-info {
+  display: flex;
+  border: 1px solid rgb(255, 255, 255);
+  flex: 1.2;
+  flex-direction: row;
+  position: relative;
+}
+.played-cards {
+  flex: 2;
+  border: 1px solid rgb(255, 255, 255);
+}
+/* 解说 */
+.right-constainer {
+  height: 95%;
+  flex: 3;
+  border: 1px solid rgb(255, 56, 56);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0px;
+  text-align: center;
+  /* justify-content: center; */
+  /* gap: 5px; */
+}
+
+.di-cards {
+  flex: 3;
+  border: 1px solid rgb(0, 119, 255);
+}
+.currently-play {
+  flex: 1;
+  border: 1px solid rgb(255, 255, 0);
+}
+.data-selected {
+  flex: 3;
+  border: 1px solid purple;
+}
+/* ai开启 */
+.down {
+  flex: 1;
+  border: 1px solid rgb(65, 61, 118);
+  overflow: hidden;
+  display: flex;
+  padding-top: 20px;
+  min-height: 0px;
+  height: 100%;
+  gap: 80px;
+}
+.down p {
+  font-size: 20px;
+  background-color: azure;
+  width: 200px;
+  height: 30px;
+  border-radius: 10px;
+  left: 10px;
+}
+.el-switch {
+  margin-left: 20px;
+}
+/* .hand-card.two-lines {
+  display: flex;
+  flex-direction: column;
+  gap: px;
+} */
+.handcards {
+}
