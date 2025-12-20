@@ -45,6 +45,13 @@ import { useRouter } from 'vue-router'
 import axios from 'axios'
 import { ElMessage } from 'element-plus'   // 如用 Element-Plus；否则改 alert
 
+
+<script setup>
+import { reactive, ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import axios from 'axios'
+import { ElMessage } from 'element-plus'   // 如用 Element-Plus；否则改 alert
+
 /* ========= 表单 & 路由 ========= */
 const form = reactive({ username: '', password: '' })
 const loading = ref(false)
