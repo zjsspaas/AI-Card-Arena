@@ -6,7 +6,7 @@
         <h3>选择模型类型</h3>
         <div class="header-actions">
           <button
-            class="refresh-btn"
+            class="refresh-btn" 
             @click="refreshAgents"
             :disabled="loading"
             title="刷新Agent列表"

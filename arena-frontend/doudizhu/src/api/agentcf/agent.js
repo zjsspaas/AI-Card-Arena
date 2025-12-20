@@ -1,4 +1,3 @@
-
 // API基础配置
 const BASE_URL = 'http://localhost:8080/api/v1'
 
@@ -88,6 +87,7 @@ const agentApi = {
         success: true,
         data: data.map(agent => ({
           id: agent.name,           // 资源标识符
+          value: agent.name,        // ✅ 新增：前端下拉菜单依赖的字段
           name: this.getAgentDisplayName(agent.name),  // 显示名称
           type: agent.name,         // 资源类型
           description: agent.description,
@@ -151,7 +151,37 @@ const agentApi = {
         timestamp: new Date().toISOString()
       }
     }
-  },
+  }
+//  async processMessage(agentName, message, params = {}) {
+//   let requestBody
+
+//   // ✅ 兼容 Go HTTP Handler（最稳）
+//   requestBody = {
+//     agent: agentName,
+//     message: message
+//   }
+
+//   // chat 额外带 session_id（如果后端支持）
+//   if (agentName === 'chat' && params.session_id) {
+//     requestBody.session_id = params.session_id
+//   }
+
+//   const data = await apiRequest(
+//     `/agents/${agentName}/process`,
+//     'POST',
+//     requestBody
+//   )
+
+//   return {
+//     success: true,
+//     data: {
+//       result: data.result || '',
+//       status: data.status || 'success'
+//     }
+//   }
+// }
+,
+
 
   /**
    * 获取指定Agent的健康状态
@@ -268,6 +298,7 @@ const agentApi = {
     return [
       {
         id: 'calculator',
+        value: 'calculator',
         name: '计算智能体',
         type: 'calculator',
         description: '支持四则运算的计算器',
@@ -276,6 +307,7 @@ const agentApi = {
       },
       {
         id: 'echo',
+        value: 'echo',
         name: '回显智能体',
         type: 'echo',
         description: '将输入原样返回',
@@ -284,6 +316,7 @@ const agentApi = {
       },
       {
         id: 'chat',
+        value: 'chat',
         name: '对话智能体',
         type: 'chat',
         description: '支持多轮对话',
