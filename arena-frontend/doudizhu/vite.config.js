@@ -40,7 +40,7 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         // 全局引入 Element Plus 的 SCSS 变量
-        additionalData: `@use "element-plus/theme-chalk/src/index.scss" as *;`
+        additionalData: ``
       }
     }
   }
