@@ -1,42 +1,43 @@
+/* 整体容器 */
 .battle-container {
   width: auto;
   height: calc(100vh - 80px);
-  /* border: 1px solid rgb(255, 56, 56); */
   display: flex;
   flex-direction: column;
   gap: 2px;
   overflow: hidden;
   padding-top: 20px;
 }
+
+/* 上方区域 */
 .up {
-  /* border: 1px solid rgb(59, 82, 255); */
   flex: 8;
-  overflow: hidden;
   display: flex;
   flex-direction: row;
   gap: 20px;
   justify-content: center;
   align-items: center;
-  height: 100%; /* 相对于.battle-container的100% */
-  min-height: 0; /* 解决flex容器问题 */
+  overflow: hidden;
+  height: 100%;
+  min-height: 0;
 }
 
+/* 左侧游戏区 */
 .left-constainer {
   height: 95%;
   flex: 9;
-  /* border: 1px solid rgb(58, 43, 222); */
   border-radius: 10px;
   background-image: url('/images/bg.png');
-  background-position: center center; /* 水平和垂直都居中 */
+  background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  /* background-size: 300px 200px; 具体宽高 */
   display: flex;
   flex-direction: column;
   gap: 20px;
   min-height: 0;
 }
 
+/* 上下玩家容器 */
 .up-down-player {
   width: 100%;
   height: 100%;
@@ -47,160 +48,157 @@
   align-items: center;
   min-height: 0;
 }
+
+/* 上方左右玩家容器 */
 .up-players {
   flex: 1;
   width: 95%;
-  border: 1px solid rgb(16, 19, 154);
+  border: 1px solid rgb(16, 19, 154); /* 调试边框 */
   display: flex;
   flex-direction: row;
   gap: 20px;
   padding-top: 10px;
 }
+
+/* 左玩家 */
 .left-player-main {
   width: 100%;
   height: 90%;
   flex: 1;
-  border: 1px solid rgb(169, 142, 74);
+  border: 1px solid rgb(169, 142, 74); /* 调试边框 */
   display: flex;
   flex-direction: row;
   gap: 10px;
+  position: relative;
 }
+
 .left-player-time {
   position: absolute;
   font-size: 30px;
   color: rgb(229, 90, 90);
-  top: 300px;
-  left: 280px;
-}
-.right-player-time {
-  position: absolute;
-  font-size: 30px;
-  color: rgb(229, 90, 90);
-  /* margin-top: 200px; */
-  right: 120px;
   top: 180px;
+  left: 120px;
 }
-.bottom-timer-player {
-  color: red;
-  font-size: 30px;
-  left: 150px;
-  top: 40px;
-  position: absolute;
-}
+
+/* 右玩家 */
 .right-player-main {
   width: 100%;
   height: 90%;
   flex: 1;
   gap: 10px;
-  border: 1px solid rgb(169, 142, 74);
+  border: 1px solid rgb(169, 142, 74); /* 调试边框 */
   display: flex;
   flex-direction: row-reverse;
   position: relative;
 }
-.user-circle {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background-color: rgb(135, 135, 234);
+
+.right-player-time {
+  position: absolute;
+  font-size: 30px;
+  color: rgb(229, 90, 90);
+  top: 180px;
+  right: 120px;
 }
-.user-info {
-  width: 100px;
-  height: 20px;
-  text-align: center;
-  /* background-color: rgb(168, 203, 234); */
-  display: flex;
-  flex-direction: column;
-}
-.icon-person {
-  font-size: 18px;
-}
-.user-score {
-  font-size: 16px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 3px;
-  border: 1px solid rgb(255, 255, 255);
-}
+
+/* 公共手牌 */
 .hand-card {
-  border: 1px solid rgb(255, 61, 61);
+  border: 1px solid rgb(255, 61, 61); /* 调试边框 */
   height: 160px;
   flex: 1;
-  /* width: 0px; */
 }
+
+/* 底部玩家容器 */
 .down-player-main {
   width: 90%;
   flex: 1;
-  border: 1px solid rgb(156, 21, 21);
+  border: 1px solid rgb(156, 21, 21); /* 调试边框 */
   display: flex;
   flex-direction: column;
-  min-height: 0px;
   gap: 10px;
   position: relative;
-}
-.button-select {
-  border: 1px solid rgb(255, 255, 255);
-  flex: 1;
-  display: flex;
-  flex-direction: row;
   min-height: 0px;
+}
+
+/* 第一层：倒计时 + 操作按钮 */
+.down-player-time,
+.button-select {
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 30px;
+  gap: 20px;
+  border: 1px solid rgb(255, 255, 0); /* 调试边框 */
+  padding: 5px;
+  /* flex: 1; */
 }
-.button-select button {
-  width: 100px;
-  height: 30px;
-}
-/* 按钮颜色 */
-.btn-hint {
-  background-color: aliceblue;
-}
-.btn-pass {
-  background-color: rgb(151, 71, 71);
-}
-.btn-play {
-  background-color: rgb(39, 132, 39);
-}
-.show-info {
+
+/* 第二层：底部玩家信息 + 手牌 */
+.down-user-cards {
   display: flex;
-  border: 1px solid rgb(255, 255, 255);
-  flex: 1.2;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid rgb(0, 255, 0); */
+  flex: 0.8;
+}
+
+/* 底部玩家信息 */
+.bottom-user-info {
+  display: flex;
   flex-direction: row;
-  position: relative;
+  align-items: center;
+  gap: 10px;
 }
-.played-cards {
-  flex: 2;
-  border: 1px solid rgb(255, 255, 255);
+
+.bottom-user-info .user-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgb(135, 135, 234);
 }
-/* 解说 */
+
+.bottom-user-info .user-name {
+  font-size: 16px;
+  color: #fff;
+}
+
+.bottom-user-info .user-score {
+  font-size: 14px;
+  background-color: #fff;
+  border-radius: 3px;
+  padding: 2px 5px;
+}
+
+/* 右侧信息区 */
 .right-constainer {
   height: 95%;
   flex: 3;
-  border: 1px solid rgb(255, 56, 56);
+  border: 1px solid rgb(255, 56, 56); /* 调试边框 */
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   min-height: 0px;
   text-align: center;
-  /* justify-content: center; */
-  /* gap: 5px; */
 }
 
 .di-cards {
   flex: 3;
-  border: 1px solid rgb(0, 119, 255);
+  border: 1px solid rgb(0, 119, 255); /* 调试边框 */
 }
+
 .currently-play {
   flex: 1;
-  border: 1px solid rgb(255, 255, 0);
+  border: 1px solid rgb(255, 255, 0); /* 调试边框 */
 }
+
 .data-selected {
   flex: 3;
-  border: 1px solid purple;
+  border: 1px solid purple; /* 调试边框 */
 }
-/* ai开启 */
+
+/* AI模式和回合显示 */
 .down {
   flex: 1;
-  border: 1px solid rgb(65, 61, 118);
+  border: 1px solid rgb(65, 61, 118); /* 调试边框 */
   overflow: hidden;
   display: flex;
   padding-top: 20px;
@@ -208,6 +206,7 @@
   height: 100%;
   gap: 80px;
 }
+
 .down p {
   font-size: 20px;
   background-color: azure;
@@ -216,13 +215,21 @@
   border-radius: 10px;
   left: 10px;
 }
+
 .el-switch {
   margin-left: 20px;
 }
-/* .hand-card.two-lines {
-  display: flex;
-  flex-direction: column;
-  gap: px;
-} */
-.handcards {
+
+/* 左右玩家信息通用 */
+.icon-person {
+  font-size: 16px;
+}
+
+.user-score {
+  width: 100px;
+  font-size: 16px;
+  /* background-color: rgb(255, 255, 255); */
+  border-radius: 3px;
+  border: 1px solid rgb(255, 255, 255);
+  text-align: center;
 }

@@ -1,14 +1,17 @@
 <template>
-  <div class="timer-wrapper">
-    <svg viewBox="0 0 100 100" class="timer-svg">
+  <div class="circle-timer" :class="{ danger: timeLeft <= warningTime }">
+    <svg class="ring" viewBox="0 0 100 100">
+      <!-- 背景环 -->
       <circle
-        class="bg-circle"
+        class="ring-bg"
         cx="50"
         cy="50"
         r="45"
       />
+
+      <!-- 进度环 -->
       <circle
-        class="progress-circle"
+        class="ring-progress"
         cx="50"
         cy="50"
         r="45"
@@ -16,88 +19,121 @@
         :stroke-dashoffset="dashOffset"
       />
     </svg>
-    <div class="timer-text">{{ timeLeft }}</div>
+
+    <!-- 中间秒数 -->
+    <div class="time-text">{{ timeLeft }}</div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
+import { ref, watch, computed, onUnmounted } from 'vue'
 
 const props = defineProps({
-  start: { type: Number, required: true },   // 初始秒数
-  running: { type: Boolean, default: true }, // 是否开始计时
+  seconds: {
+    type: Number,
+    default: 15,
+  },
+  running: {
+    type: Boolean,
+    default: false,
+  },
+  warningTime: {
+    type: Number,
+    default: 5,
+  },
 })
 
-const emit = defineEmits(['finish'])
+const emit = defineEmits(['timeout'])
 
-const timeLeft = ref(props.start)
+const timeLeft = ref(props.seconds)
 let timer = null
 
 const radius = 45
 const circumference = 2 * Math.PI * radius
 
 const dashOffset = computed(() => {
-  return circumference * (1 - timeLeft.value / props.start)
+  return circumference * (1 - timeLeft.value / props.seconds)
 })
 
-const startTimer = () => {
-  if (timer) clearInterval(timer)
+const start = () => {
+  clearInterval(timer)
+  timeLeft.value = props.seconds
+
   timer = setInterval(() => {
-    if (timeLeft.value > 0) {
-      timeLeft.value--
-    } else {
+    timeLeft.value--
+    if (timeLeft.value <= 0) {
       clearInterval(timer)
-      emit('finish')
+      emit('timeout')
     }
   }, 1000)
 }
 
-watch(() => props.running, (val) => {
-  if (val) startTimer()
-  else clearInterval(timer)
-})
+watch(
+  () => props.running,
+  (val) => {
+    if (val) start()
+    else clearInterval(timer)
+  },
+  { immediate: true },
+)
 
-onMounted(() => {
-  if (props.running) startTimer()
-})
-
-onBeforeUnmount(() => clearInterval(timer))
+onUnmounted(() => clearInterval(timer))
 </script>
 
 <style scoped>
-.timer-wrapper {
+.circle-timer {
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 40px;
+  height: 40px;
 }
 
-.timer-svg {
-  transform: rotate(-90deg);
+.ring {
   width: 100%;
   height: 100%;
+  transform: rotate(-90deg);
 }
 
-.bg-circle {
+.ring-bg {
   fill: none;
-  stroke: #eee;
-  stroke-width: 10;
+  stroke: rgba(255, 255, 255, 0.15);
+  stroke-width: 8;
 }
 
-.progress-circle {
+.ring-progress {
   fill: none;
-  stroke: red;
-  stroke-width: 10;
+  stroke: #67c23a;
+  stroke-width: 8;
   stroke-linecap: round;
-  transition: stroke-dashoffset 1s linear;
+  transition: stroke-dashoffset 1s linear, stroke 0.3s;
 }
 
-.timer-text {
+.time-text {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 20px;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
   font-weight: bold;
-  color: red;
+  color: #fff;
+}
+
+.danger .ring-progress {
+  stroke: #f56c6c;
+}
+
+.danger .time-text {
+  color: #f56c6c;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
 }
 </style>
