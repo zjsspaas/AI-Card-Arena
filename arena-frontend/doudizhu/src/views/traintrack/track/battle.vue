@@ -196,9 +196,22 @@ function bottomPlay(cards) {
   count.value++
 }
 
+// function onPass() {
+//   console.log('玩家过牌')
+// }
 function onPass() {
   console.log('玩家过牌')
+
+  // 取消所有选中状态，让牌回到原位
+  bottomPlayerCards.value.forEach(card => {
+    card.selected = false
+  })
+
+  // 回合更新
+  count.value++
 }
+
+
 </script>
 
 <style>
