@@ -8,6 +8,13 @@ import Racingtrack from '@/views/racingtrack/index.vue'
 import Register from '@/views/register/index.vue'
 import ReplayList from '@/views/replay/list.vue'
 import ReplayDetail from '@/views/replay/detail.vue'
+import ReplayDoudizhu from '@/views/replay/doudizhu.vue'
+import ReplayDoudizhu_detail from '@/views/replay_detail/doudizhu_detail.vue'
+import ReplayUno from '@/views/replay/uno.vue'
+import ReplayGomoku from '@/views/replay/gomoku.vue'
+import ReplayFlightChess from '@/views/replay/flight-chess.vue'
+import ReplayTexasPoker from '@/views/replay/texas-poker.vue'
+import ReplayGo from '@/views/replay/go.vue'
 import Traintrack_t from '@/views/traintrack_t/index.vue'
 
 import TraintrackIndex from '@/views/traintrack/index.vue' // 训练场/赛道选择页
@@ -51,6 +58,43 @@ const routes = [
     path: '/replay/list',
     name: 'ReplayList',
     component: ReplayList,
+  },
+  {
+    path: '/replay/doudizhu',
+    name: 'ReplayDoudizhu',
+    component: ReplayDoudizhu,
+  },
+  {
+    path: '/replay/uno',
+    name: 'ReplayUno',
+    component: ReplayUno,
+  },
+  {
+    path: '/replay/gomoku',
+    name: 'ReplayGomoku',
+    component: ReplayGomoku,
+  },
+  {
+    path: '/replay/flight-chess',
+    name: 'ReplayFlightChess',
+    component: ReplayFlightChess,
+  },
+  {
+    path: '/replay/texas-poker',
+    name: 'ReplayTexasPoker',
+    component: ReplayTexasPoker,
+  },
+  {
+    path: '/replay/go',
+    name: 'ReplayGo',
+    component: ReplayGo,
+  },
+  //斗地主详情页路由
+  {
+    path: '/replay/doudizhu/:videoId',
+    name: 'ReplayDoudizhu_detail',
+    component: ReplayDoudizhu_detail,
+    props: true // 将路由参数作为props传递给组件
   },
   {
     path: '/replay/detail/:id',
