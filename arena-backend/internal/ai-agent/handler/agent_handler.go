@@ -51,6 +51,32 @@ func (h *AgentHandler) ProcessRequest(c *gin.Context) {
 		return
 	}
 
+	// 检查是否请求流式响应
+	stream := c.Query("stream") == "true"
+
+	// 如果是流式响应且 Agent 支持流式响应接口
+	if stream {
+		if streamAgent, ok := agentInstance.(agent.StreamAgent); ok {
+			// 设置响应头
+			c.Header("Content-Type", "text/event-stream")
+			c.Header("Cache-Control", "no-cache")
+			c.Header("Connection", "keep-alive")
+
+			// 调用流式处理方法
+			if err := streamAgent.StreamProcess(c.Request.Context(), &req, c.Writer); err != nil {
+				// 如果流式处理失败，返回错误
+				c.JSON(http.StatusInternalServerError, gin.H{
+					"success": false,
+					"error":   "流式处理请求时出错: " + err.Error(),
+				})
+				return
+			}
+
+			return
+		}
+	}
+
+	// 非流式响应
 	resp, err := agentInstance.Process(c.Request.Context(), &req)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
