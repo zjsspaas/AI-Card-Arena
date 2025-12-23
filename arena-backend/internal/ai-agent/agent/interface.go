@@ -1,6 +1,9 @@
 package agent
 
-import "context"
+import (
+	"context"
+	"io"
+)
 
 // Request 表示 Agent 的请求
 type Request struct {
@@ -29,6 +32,14 @@ type Agent interface {
 	
 	// Health 检查 Agent 的健康状态
 	Health(ctx context.Context) error
+}
+
+// StreamAgent 定义了支持流式响应的 Agent 接口
+type StreamAgent interface {
+	Agent
+	
+	// StreamProcess 处理请求并流式返回响应
+	StreamProcess(ctx context.Context, req *Request, writer io.Writer) error
 }
 
 

@@ -56,6 +56,11 @@ func registerAgents(registry *agent.Registry) {
 		log.Printf("注册 ChatAgent 失败: %v", err)
 	}
 
+	// 注册 DeepSeek Agent（支持流式响应）
+	if err := registry.Register(agent.NewDeepSeekAgent("sk-e1fe529fa10941968f6dc1df540f3ca1")); err != nil {
+		log.Printf("注册 DeepSeekAgent 失败: %v", err)
+	}
+
 	// 在这里添加更多 Agent 的注册
 	// 例如: registry.Register(agent.NewYourCustomAgent())
 }
