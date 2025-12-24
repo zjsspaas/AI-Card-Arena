@@ -2,23 +2,24 @@ package main
 
 import (
 	"arena-backend/config"
-	"arena-backend/model"
 	"arena-backend/router"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	// 1️⃣ 设置 Gin 运行模式
 	gin.SetMode(gin.ReleaseMode)
-	// ① 初始化数据库（连接 MySQL）
+
+	// 2️⃣ 初始化数据库连接（包含自动迁移表结构）
+	// AutoMigrate 已在 config.InitDB() 中执行，会自动创建 users、roles、user_roles 表
 	config.InitDB()
 
-	// ② 自动建表（如果不存在就创建）
-	config.DB.AutoMigrate(&model.User{})
-
-	// ③ 初始化路由
+	// 3️⃣ 初始化路由
 	r := router.SetupRouter()
 
-	// ④ 启动 HTTP 服务（这是“接口端口”）
-	r.Run(":8080")
+	// 4️⃣ 启动 HTTP 服务
+	if err := r.Run(":8080"); err != nil {
+		panic("服务启动失败: " + err.Error())
+	}
 }
