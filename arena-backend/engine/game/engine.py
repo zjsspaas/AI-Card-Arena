@@ -9,6 +9,7 @@ logger = logging.getLogger(__name__)
 class GameEngine:
     def __init__(self, seed: Optional[int] = None):
         self.seed = seed
+        # 提前创建一个环境，但真正使用前仍会通过 reset 进行初始化
         self.env = rlcard.make('doudizhu', config={'seed': self.seed})
         self.game_id = str(uuid.uuid4())
         self._initialized = False
@@ -16,18 +17,16 @@ class GameEngine:
         self._action_str_to_id: Dict[str, int] = {}
     
     def reset(self, config: Optional[Dict] = None) -> Tuple[Dict, int]:
-        '''
-            初始化/重置游戏环境
-            
-            Args:
-                config: RLCard 配置字典，可包含 'seed' 等参数
-                
-            Returns:
-                (初始状态, 当前玩家ID)
-            '''
-        if self._initialized:
-            self.env.reset()
-            return self.state, self.player_id
+        """
+        初始化/重置游戏环境
+
+        Args:
+            config: RLCard 配置字典，可包含 'seed' 等参数
+
+        Returns:
+            (初始状态, 当前玩家ID)
+        """
+        # 统一走完整初始化流程，避免依赖不存在的缓存字段
         if self.seed is not None:
             set_seed(self.seed)
         elif config and 'seed' in config:
@@ -47,14 +46,26 @@ class GameEngine:
         """初始化动作映射表（ID <-> 字符串）"""
         if self.env is None:
             return
-        
-        # RLCard 的 DoudizhuEnv 内部有 _ID_2_ACTION 和 _ACTION_2_ID 字典
+
+        # RLCard 的 DoudizhuEnv 内部有 _ID_2_ACTION（可能是 list 或 dict）
         if hasattr(self.env, '_ID_2_ACTION'):
-            self._action_id_to_str = self.env._ID_2_ACTION.copy()
-            # 创建反向映射
-            self._action_str_to_id = {
-                v: k for k, v in self._action_id_to_str.items()
-            }
+            raw_map = self.env._ID_2_ACTION
+
+            # 如果是 dict，直接使用
+            if isinstance(raw_map, dict):
+                self._action_id_to_str = dict(raw_map)
+            # 如果是 list，就用下标作为 action_id
+            elif isinstance(raw_map, list):
+                self._action_id_to_str = {i: v for i, v in enumerate(raw_map)}
+            else:
+                logger.warning(f"未知的 _ID_2_ACTION 类型: {type(raw_map)}，将不使用缓存映射表")
+                self._action_id_to_str = {}
+
+            # 创建反向映射（字符串 -> id）
+            if self._action_id_to_str:
+                self._action_str_to_id = {
+                    v: k for k, v in self._action_id_to_str.items()
+                }
         else:
             logger.warning("无法获取动作映射表，将使用备用方法")
     def get_state(self, player_id: int) -> Dict:
